@@ -377,6 +377,9 @@ if [ "$1" = 'rabbitmq-server' ] && [ "$shouldWriteConfig" ]; then
 		fullConfig+=(
 			"{ rabbitmq_management, $(rabbit_array "${rabbitManagementConfig[@]}") }"
 		)
+		fullConfig+=(
+			"{ rabbit, [ {log_levels, [{connection, error}]} ] }"
+		)
 	fi
 
 	echo "$(rabbit_array "${fullConfig[@]}")." > /etc/rabbitmq/rabbitmq.config
